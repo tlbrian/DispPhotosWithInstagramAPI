@@ -18,6 +18,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
+
 import instagram.InstagramDialog.OAuthDialogListener;
 
 /**
@@ -115,6 +117,7 @@ public class InstagramApp {
 				    writer.flush();
 					String response = streamToString(urlConnection.getInputStream());
 					Log.i(TAG, "response " + response);
+
 					JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
 					
 					mAccessToken = jsonObj.getString("access_token");
@@ -146,19 +149,22 @@ public class InstagramApp {
 				int what = WHAT_FINALIZE;
 				try {
 					URL url = new URL(API_URL + "/users/" + mSession.getId() + "/?access_token=" + mAccessToken);
-
 					Log.d(TAG, "Opening URL " + url.toString());
+
 					HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 					urlConnection.setRequestMethod("GET");
 					urlConnection.setDoInput(true);
-					urlConnection.setDoOutput(true);
+					//urlConnection.setDoOutput(true);
+
 					urlConnection.connect();
+
 					String response = streamToString(urlConnection.getInputStream());
+					urlConnection.disconnect();
+
 					System.out.println(response);
 					JSONObject jsonObj = (JSONObject) new JSONTokener(response).nextValue();
 					String name = jsonObj.getJSONObject("data").getString("full_name");
-					String bio = jsonObj.getJSONObject("data").getString("bio");
-					Log.i(TAG, "Got name: " + name + ", bio [" + bio + "]");
+					Log.i(TAG, "Got name: " + name);
 				} catch (Exception ex) {
 					what = WHAT_ERROR;
 					ex.printStackTrace();

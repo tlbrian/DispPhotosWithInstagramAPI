@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onSuccess() {
 				tvSummary.setText("Connected as " + mApp.getUserName());
 				btnConnect.setText("Disconnect");
+				btnDisp.setEnabled(true);
 			}
 
 			@Override
@@ -94,13 +95,10 @@ public class MainActivity extends ActionBarActivity {
 		});
 
 		btnDisp = (Button) findViewById(R.id.btnDispImages);
-		if (mApp.hasAccessToken()) {
-			btnDisp.setEnabled(true);
-		}
 		btnDisp.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(MainActivity.this, SampleGridViewActivity.class);
+				Intent intent = new Intent(MainActivity.this, GridViewActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -108,6 +106,7 @@ public class MainActivity extends ActionBarActivity {
 		if (mApp.hasAccessToken()) {
 			tvSummary.setText("Connected as " + mApp.getUserName());
 			btnConnect.setText("Disconnect");
+			btnDisp.setEnabled(true);
 		}
 
 	}

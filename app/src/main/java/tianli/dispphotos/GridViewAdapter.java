@@ -1,6 +1,7 @@
 package tianli.dispphotos;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,11 +13,11 @@ import org.json.JSONException;
 
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
-final class SampleGridViewAdapter extends BaseAdapter {
+final class GridViewAdapter extends BaseAdapter {
 	private final Context context;
 	private final JSONArray jsonArr;
 
-	public SampleGridViewAdapter(Context context, JSONArray jsonArr) {
+	public GridViewAdapter(Context context, JSONArray jsonArr) {
 		this.context = context;
 		this.jsonArr = jsonArr;
 	}
@@ -43,12 +44,13 @@ final class SampleGridViewAdapter extends BaseAdapter {
     }
 
 	@Override public int getCount() {
+		Log.i("picLength", "" + jsonArr.length());
 		return jsonArr.length();
 	}
 
 	@Override public String getItem(int position) {
 		try {
-		  return jsonArr.getJSONObject(position).getJSONObject("images").getString("low_resolution");
+		  return jsonArr.getJSONObject(position).getJSONObject("images").getJSONObject("low_resolution").getString("url");
 		} catch (JSONException e) {
 		  e.printStackTrace();
 		}

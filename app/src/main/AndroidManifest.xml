@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SampleGridViewActivity"></activity>
+        <activity android:name=".GridViewActivity"></activity>
     </application>
 
 </manifest>

@@ -5,10 +5,10 @@ import android.widget.AbsListView;
 
 import com.squareup.picasso.Picasso;
 
-public class SampleScrollListener implements AbsListView.OnScrollListener {
+public class ScrollListener implements AbsListView.OnScrollListener {
   private final Context context;
 
-  public SampleScrollListener(Context context) {
+  public ScrollListener(Context context) {
     this.context = context;
   }
 
