@@ -6,20 +6,31 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
+        android:layout_weight="0"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="#selfie"
         android:id="@+id/textView"
-        android:layout_marginBottom="10dp"
         android:background="#FF6347"
         android:gravity="center"/>
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/grid_view"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
           android:numColumns="3"
           android:scrollbarStyle="insideOverlay"
           android:scrollbars="none"
           android:listSelector="@null" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="click to drag&amp;drop"
+        android:id="@+id/toggleButton"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

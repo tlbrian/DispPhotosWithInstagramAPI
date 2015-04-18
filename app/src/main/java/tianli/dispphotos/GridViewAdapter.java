@@ -11,15 +11,24 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
 
 final class GridViewAdapter extends BaseAdapter {
 	private final Context context;
-	private final JSONArray jsonArr;
+	private final ArrayList<String> items;
 
 	public GridViewAdapter(Context context, JSONArray jsonArr) {
 		this.context = context;
-		this.jsonArr = jsonArr;
+		items = new ArrayList<>();
+		try {
+		for (int i = 0; i < jsonArr.length(); i++) {
+				items.add(jsonArr.getJSONObject(i).getJSONObject("images").getJSONObject("low_resolution").getString("url"));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
     @Override
@@ -40,21 +49,22 @@ final class GridViewAdapter extends BaseAdapter {
 			    .tag(context) //
 			    .into(view);
 
+	    view.setTag(position);
+
 	    return view;
     }
 
 	@Override public int getCount() {
-		Log.i("picLength", "" + jsonArr.length());
-		return jsonArr.length();
+		Log.i("picLength", "" + items.size());
+		return items.size();
+	}
+
+	public ArrayList<String> getItems() {
+		return items;
 	}
 
 	@Override public String getItem(int position) {
-		try {
-		  return jsonArr.getJSONObject(position).getJSONObject("images").getJSONObject("low_resolution").getString("url");
-		} catch (JSONException e) {
-		  e.printStackTrace();
-		}
-		return null;
+		return items.get(position);
 	}
 
 	@Override public long getItemId(int position) {
